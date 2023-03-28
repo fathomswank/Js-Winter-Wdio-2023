@@ -1,6 +1,6 @@
 // Due date: Mar 15 (eod)
 
-const { numberOfElementsToBeMoreThan, expect } = require("chai");
+const { expect } = require("chai");
 
 // TC-1: Verify the current date is select by default in Sign Up dropdown
 /**
@@ -91,10 +91,13 @@ it.only('Verify the travelers count', async () => {
     await $('(//button[contains(text(), "")])[19]').click();
     await browswer.pause(1000);
 
-    const checkCount = await $("(//span[contains(text(), '')])[6]").isDisplayed();
+    const checkCount = await $("(//span[contains(text(), '')])[6]")
     await browser.pause(1000);
 
+    const travelersCountOnWeb = await checkCount.getText();
+    expect(travelersCountOnWeb.endsWith("7 travelers, 2 rooms"), 'Travelers and rooms count are not as expected').to.be.true;
+    //expect(checkCount, 'Not as Expected').to.be.equal('7 travelers, 2 rooms');
 
-    expect(checkCount, 'Not as Expected').to.be.equal('7 travelers, 2 rooms');
+    // "Travelers: 7 travelers, 2 rooms"    "7 travelers, 2 rooms"
 
 })
